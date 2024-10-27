@@ -71,7 +71,7 @@ public class BloggingContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(local);Database=MyDatabase;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(local);Database=MyDatabase;Trusted_Connection=True;TrustServerCertificate=True;");
     }
 }
 ````
@@ -79,6 +79,12 @@ public class BloggingContext : DbContext
 The `UseSqlServer` method is specific for the SQL Server provider in EF Core and requires a specific NuGet package 
 `Microsoft.EntityFrameworkCore.SqlServer`. You need to add this NuGet package to your project to be able to configure
 the connection to your SQL Server database.
+
+Now you have setup your DbContext with entities and a connection to your database, it is time to create your first 
+migration. This initial migration will create the tables in your database according to the entity models that were 
+created before. Once these tables are created, your application can interact with your database.
+
+See [Creating your first migration](creating-your-first-migration.md)
 
   
 
