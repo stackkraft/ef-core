@@ -84,7 +84,8 @@ Now you have setup your DbContext with entities and a connection to your databas
 migration. This initial migration will create the tables in your database according to the entity models that were 
 created before. Once these tables are created, your application can interact with your database.
 
-See [Creating your first migration](creating-your-first-migration.md)
+See [Creating your first migration](creating-your-first-migration.md) for an overview of how to create your first 
+migration and to start interacting with your database from within your application code.   
 
   
 
