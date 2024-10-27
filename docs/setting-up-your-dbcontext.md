@@ -61,7 +61,7 @@ The last step is to configure your database so EF Core knows how to interact wit
 This step is specific for different database systems, so you will need check how this is done for your specific 
 database.
 
-In the example below a connection to a SQLite database is being configured.
+In the example below a connection to a SQL Server database is being configured.
 
 ```csharp
 public class BloggingContext : DbContext
@@ -69,20 +69,16 @@ public class BloggingContext : DbContext
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Post> Posts { get; set; }
 
-    public string DbPath { get; }
-
-    public BloggingContext()
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        DbPath = System.IO.Path.Join(path, "blogging.db");
+        optionsBuilder.UseSqlServer("Server=(local);Database=MyDatabase;Trusted_Connection=True;");
     }
-
-    // The following configures EF to create a Sqlite database file in the
-    // special "local" folder for your platform.
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
 }
 ````
+
+The `UseSqlServer` method is specific for the SQL Server provider in EF Core and requires a specific NuGet package 
+`Microsoft.EntityFrameworkCore.SqlServer`. You need to add this NuGet package to your project to be able to configure
+the connection to your SQL Server database.
+
   
 
